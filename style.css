@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+:root {
+    --mont: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: white;
+    min-height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1em;
+    color: black;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    z-index: 1;
+    font-family: var(--mont);
+}
+
+header nav {
+    display: flex;
+    flex-direction: column;
+}
+
+header a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+}
+
+header a:hover {
+    background-color: rgb(204, 204, 204);
+}
+
+header a:link, header a:visited, header a:active {
+    text-decoration: none;
+    color: black;
+}
+
+main {
+    min-height: 100vh;
+    width: 100%;
+    padding: 90px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+main h1 {
+    font-family: var(--mont);
+    font-size: 2em;
+    text-align: center;
+}
+
+main p {
+    font-family: var(--mont);
+    font-size: 1em;
+    text-align: center;
+}
+
+@media only screen and (min-width: 425px) {
+    
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+
+    header nav {
+        min-height: 60px;
+        flex-direction: row;
+    }
+
+    header a {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+}
