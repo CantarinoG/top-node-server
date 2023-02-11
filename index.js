@@ -1,50 +1,29 @@
-var http = require('http');
-var url = require('url');
-var fs = require('fs');
+const express = require('express');
+const app = express();
+const { readFile } = require('fs').promises;
 
-http.createServer(function (req, res) {
+app.get('/', async (request, response) => {
+    response.status(200).send( await readFile('./index.html', 'utf8') );
+});
 
-  var q = url.parse(req.url, true);
-  var filename = "." + q.pathname;
+app.get('/index', async (request, response) => {
+  response.status(200).send( await readFile('./index.html', 'utf8') );
+});
 
-  if(filename === "./style.css") {
+app.get('/about', async (request, response) => {
+    response.status(200).send( await readFile('./about.html', 'utf8') );
+});
 
-    fs.readFile(filename, function (err, data){
-        
-        if (err) {
+app.get('/contact-me', async (request, response) => {
+    response.status(200).send( await readFile('./contact-me.html', 'utf8') );
+});
 
-            res.writeHead(404);
-            return res.end();
+app.get('/style.css', function(req, res) {
+  res.sendFile(__dirname + "/" + "style.css");
+});
 
-        }
+app.use( async (request, response) => {
+    response.status(404).send( await readFile('./404.html', 'utf8'));
+});
 
-        res.writeHead(200, {'Content-Type': 'text/css'});
-        return res.end(data);
-
-    });
-
-  }
- 
-  else {
-
-    if (filename === "./") filename = "./index";
-
-    if(!fs.existsSync(filename + ".html")) filename = "./404";
-
-    fs.readFile(filename + ".html", function(err, data) {
-
-        if (err) {
-
-        res.writeHead(404, {'Content-Type': 'text/html'});
-        return res.end("404 Not Found");
-
-        } 
-
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        return res.end();
-
-    });
-
-  }
-}).listen(8080);
+app.listen(process.env.PORT || 3000);
